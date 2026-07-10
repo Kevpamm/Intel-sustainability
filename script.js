@@ -1,29 +1,15 @@
-const rtlLanguages = [
-  "ar",
-  "he",
-  "fa",
-  "ur",
-  "ps",
-  "sd",
-  "ku",
-  "yi"
-];
-
-function getCurrentLanguage() {
-  const htmlLang = document.documentElement.lang;
-  const googleTranslateLang = document.querySelector("html").getAttribute("lang");
-
-  return (googleTranslateLang || htmlLang || "en").toLowerCase();
-}
+const rtlLanguages = ["ar", "he", "fa", "ur", "ps", "sd", "ku", "yi"];
 
 function applyDirectionByLanguage() {
-  const currentLanguage = getCurrentLanguage();
-  const shortLanguageCode = currentLanguage.split("-")[0];
+  const lang = document.documentElement.lang || "en";
+  const shortLang = lang.toLowerCase().split("-")[0];
 
-  if (rtlLanguages.includes(shortLanguageCode)) {
+  if (rtlLanguages.includes(shortLang)) {
     document.documentElement.setAttribute("dir", "rtl");
+    document.body.classList.add("rtl-layout");
   } else {
     document.documentElement.setAttribute("dir", "ltr");
+    document.body.classList.remove("rtl-layout");
   }
 }
 
@@ -35,5 +21,5 @@ const observer = new MutationObserver(() => {
 
 observer.observe(document.documentElement, {
   attributes: true,
-  attributeFilter: ["lang", "class"]
+  attributeFilter: ["lang"]
 });
