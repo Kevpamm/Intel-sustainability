@@ -407,9 +407,6 @@ html[dir="rtl"] body {
   direction: rtl;
 }
 
-html[dir="rtl"] .hero-header {
-  flex-direction: row-reverse;
-}
 
 html[dir="rtl"] .hero-content {
   text-align: center;
